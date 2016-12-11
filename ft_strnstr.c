@@ -6,7 +6,7 @@
 /*   By: adubedat <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/11/25 21:38:01 by adubedat          #+#    #+#             */
-/*   Updated: 2015/11/25 21:50:38 by adubedat         ###   ########.fr       */
+/*   Updated: 2015/11/27 16:43:30 by adubedat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,13 +20,13 @@ char	*ft_strnstr(const char *s1, const char *s2, size_t n)
 	i = 0;
 	if (*s2 == '\0')
 		return ((char*)s1);
-	while (s1[i] && i < n)
+	while (s1[i] != '\0' && i < n)
 	{
 		j = 0;
 		while (s1[i + j] == s2[j] && s2[j] != '\0' && (i + j) < n)
 			j++;
 		if (s2[j] == '\0')
-			return ((char*)s1);
+			return ((char*)s1 + i);
 		if ((i + j) == n)
 			return (NULL);
 		i++;
