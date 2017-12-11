@@ -1,27 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putstr.c                                        :+:      :+:    :+:   */
+/*   ft_putnbr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: adubedat <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2015/11/23 13:34:26 by adubedat          #+#    #+#             */
-/*   Updated: 2016/05/11 19:35:38 by adubedat         ###   ########.fr       */
+/*   Created: 2015/11/23 16:11:56 by adubedat          #+#    #+#             */
+/*   Updated: 2017/12/01 15:03:59 by adubedat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	ft_putstr(char const *s)
+void	ft_putnbr_hexa(unsigned long int n)
 {
-	int i;
+	char	*b;
 
-	i = 0;
-	if (s == NULL)
-		return ;
-	while (s[i] != '\0')
+	b = "0123456789abcdef";
+	if (n >= 16)
 	{
-		ft_putchar(s[i]);
-		i++;
+		ft_putnbr_hexa(n / 16);
+		ft_putnbr_hexa(n % 16);
 	}
+	if (n < 16)
+		write(1, &b[n], 1);
 }

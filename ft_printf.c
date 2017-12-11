@@ -6,7 +6,7 @@
 /*   By: adubedat <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/12/28 17:21:37 by adubedat          #+#    #+#             */
-/*   Updated: 2016/01/04 19:32:01 by adubedat         ###   ########.fr       */
+/*   Updated: 2017/11/16 15:55:16 by adubedat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,13 +19,16 @@ char	*get_param(const char *str, int *i, char *c, char *param)
 
 	j = *i;
 	k = 0;
-	while (str[*i] && ft_strchr("#0 -+.123456789hljz", str[*i]) != NULL)
+	while (str[*i] && ft_strchr("#0 *-+.123456789hljz", str[*i]) != NULL)
 		*i = *i + 1;
 	if (str[*i] == '\0')
 		return (NULL);
 	*c = str[*i];
-	if (!(param = (char*)malloc(sizeof(char) * (*i - j) + 1)))
+	if (!(param = (char*)malloc(sizeof(char) * (*i - j + 2))))
+	{
+		printf("%d %d\n", *i, j);
 		return (NULL);
+	}
 	while (j <= *i)
 	{
 		param[k] = str[j];
@@ -60,7 +63,7 @@ int		print_var(const char *str, int *i, va_list args)
 	f = init_flags(f);
 	if (ft_strcmp(f.param, "hhld") == 0)
 		f.modifier = 4;
-	f = check_first_flag(f);
+	f = check_first_flag(f, args);
 	if (f.conversion == 's' || f.conversion == 'S'
 			|| ft_strchr("sSpdDioOuUxXcC%", f.conversion) == NULL)
 		return (string_conv(args, f));
